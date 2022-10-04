@@ -301,6 +301,9 @@ class LcdApi:
 </pre>
 
 # Test the code with provided circuit diagram `lcd_test.py`
+![image](https://user-images.githubusercontent.com/63813881/193835577-e32b0e1c-a056-43ae-a505-a71dc7364ef9.png)
+![image](https://user-images.githubusercontent.com/63813881/193835355-ce7877c7-e248-4dc9-aaf7-6c2e057feada.png)
+
 <pre>
 from machine import Pin, I2C, ADC
 from time import sleep, sleep_ms
