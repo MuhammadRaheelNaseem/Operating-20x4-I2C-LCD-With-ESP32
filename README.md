@@ -301,9 +301,9 @@ class LcdApi:
 </pre>
 
 # Test the code with provided circuit diagram `lcd_test.py`
+![image](https://user-images.githubusercontent.com/63813881/193838318-bee1332e-6f1a-490d-b402-82af6d89be0e.png)
 ![image](https://user-images.githubusercontent.com/63813881/193835577-e32b0e1c-a056-43ae-a505-a71dc7364ef9.png)
 ![image](https://user-images.githubusercontent.com/63813881/193835355-ce7877c7-e248-4dc9-aaf7-6c2e057feada.png)
-
 <pre>
 from machine import Pin, I2C, ADC
 from time import sleep, sleep_ms
@@ -323,7 +323,35 @@ while True:
     sleep(1)
 </pre>
 
+# Measure weather and then show in LCD `lcd_test2.py`
+![image](https://user-images.githubusercontent.com/63813881/193839730-55619333-2574-4017-81de-38c90fe571c3.png)
+<pre>
+from machine import Pin, I2C, ADC
+from time import sleep, sleep_ms
+from machine_i2c_lcd import I2cLcd
+import dht 
 
+sensor = dht.DHT22(Pin(12))
+i2c = I2C(0, scl=Pin(22), sda=Pin(21), freq=400000)
+
+addr = i2c.scan()[0]
+lcd = I2cLcd(i2c, addr, 2, 16)
+
+while True:
+    sensor.measure()
+    temp = sensor.temperature()
+    hum = sensor.humidity()
+    temp_f = temp * (9/5) + 32.0
+    lcd.putstr("Welcome To Weather Station..\n")
+    sleep(1)
+    lcd.clear()
+    lcd.putstr(f"Temp: {temp} °C")
+    sleep(1)
+    lcd.clear()
+    lcd.putstr(f"Humidity: {hum} %")
+    lcd.clear()
+    sleep(0.5)
+</pre>    
 
 
 
